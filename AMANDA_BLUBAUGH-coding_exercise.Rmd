@@ -1,0 +1,88 @@
+---
+title: "R Notebook: Amanda Blubaugh- BIOS8060E R coding 1.0"
+output: html_notebook
+---
+```{r}
+library(dslabs)
+library(tidyverse)
+
+data(package='dslabs')
+list.files(system.file("script", package= "dslabs"))
+```
+
+```{r}
+#examine gapminder data set
+data("gapminder")
+help(package=dslabs)
+help("gapminder")
+
+str(gapminder)
+
+summary(gapminder)
+
+class(gapminder)
+
+```
+
+```{r}
+#filter out any data that does not have the continent listed as Africa in the gapminder data set
+africadata <- filter(gapminder, continent=="Africa")
+                        
+str(africadata)
+
+summary(africadata)
+
+```
+
+```{r}
+#only take the columns we are interested out of our afriadata set
+infmorVlife <- select(africadata, infant_mortality, life_expectancy)
+popVlife <- select(africadata, population, life_expectancy)
+
+str(infmorVlife)
+summary(infmorVlife)
+
+str(popVlife)
+summary(popVlife)
+
+```
+
+```{r}
+
+plot(infmorVlife)
+
+plot(popVlife)
+
+```
+
+```{r}
+#only take data from africadata if the column year is equal to 2000
+year2000 <- subset(africadata, year==2000)
+
+str(year2000)
+
+summary(year2000)
+
+IvL <- select(year2000, infant_mortality, life_expectancy)
+PvL <- select(year2000, population, life_expectancy)
+
+plot(IvL)
+plot(PvL)
+
+#yes, you don't need to intermediately define anything
+plot(select(year2000, infant_mortality, life_expectancy))
+
+```
+
+```{r}
+infmort <- lm(infant_mortality ~ life_expectancy, data=year2000)
+population <- lm(population ~ life_expectancy, data=year2000)
+
+summary(infmort)
+summary(population)
+
+#After viewing the extremely low p value for infant mortality as a predictor for life expectancy, and the extremely high p value for population as a predictor of life expectancy, as well as comparing both linear plots of these in the year 2000, it is safe to say that infant mortality rates in Africa were far more predictive of life expectancy than population.
+
+```
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook.
