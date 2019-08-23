@@ -1,6 +1,8 @@
 ---
-title: "R Notebook: Amanda Blubaugh- BIOS8060E R coding 1.0"
-output: html_notebook
+title: 'R Notebook: Amanda Blubaugh- BIOS8060E R coding 1.0'
+output:
+  html_document:
+    df_print: paged
 ---
 ```{r}
 library(dslabs)
