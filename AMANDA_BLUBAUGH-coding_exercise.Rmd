@@ -1,5 +1,10 @@
 ---
-title: 'R Notebook: Amanda Blubaugh- BIOS8060E R coding 1.0'
+output:
+  word_document: default
+  html_document: default
+---
+---
+title: 'R Notebook: Amanda Blubaugh- Mia Carmichael edits 
 output:
   html_document:
     df_print: paged
@@ -87,22 +92,24 @@ summary(population)
 # Mia Carmichael's edits 
 Write code to load the tidyverse collection of packages and the skimr package. 
 ```{r}
-library(tidyverse)
-library (skimr)
+install.packages('dplyr')
+library("dplyr")
+library("tidyverse")
+library ("skimr")
 ```
 
 Use the glimpse function from dplyr and the skim function from the skimr package to look at the gapminder object.
 
 ```{r}
 glimpse(gapminder)
-dplyr(gapminder)
+skim(gapminder)
 ```
 
 Use the filter and select functions from dplyr to extract only the african countries from the gapminder object and then keep only the variables infant_mortality, life_expectancy, population and country.
 ```{r}
 gapminder %>%
-filter(continent == "Africa") %>%
-select(country, infant_mortality, life_expectancy, population) %>%
+  filter(continent == "Africa") %>%
+  select(country, infant_mortality, life_expectancy, population)
 
 ```
 
@@ -131,7 +138,6 @@ filter(continent == "Africa" | year == 2000)
 ggplot(gapminder, aes(x = life_expectancy, y = infant_mortality, color = country) ) %>%
      geom_point() +
      geom_smooth(method = "lm", se = FALSE)
-
 ```
 
 
