@@ -3,10 +3,7 @@ title: 'R Notebook: Amanda Blubaugh- BIOS8060E R coding 1.0'
 output:
   html_document:
     df_print: paged
----
-```{r}
-library(dslabs)
-library(tidyverse)
+
 
 data(package='dslabs')
 list.files(system.file("script", package= "dslabs"))
@@ -86,5 +83,58 @@ summary(population)
 #After viewing the extremely low p value for infant mortality as a predictor for life expectancy, and the extremely high p value for population as a predictor of life expectancy, as well as comparing both linear plots of these in the year 2000, it is safe to say that infant mortality rates in Africa were far more predictive of life expectancy than population.
 
 ```
+
+# Mia Carmichael's edits 
+Write code to load the tidyverse collection of packages and the skimr package. 
+```{r}
+library(tidyverse)
+library (skimr)
+```
+
+Use the glimpse function from dplyr and the skim function from the skimr package to look at the gapminder object.
+
+```{r}
+glimpse(gapminder)
+dplyr(gapminder)
+```
+
+Use the filter and select functions from dplyr to extract only the african countries from the gapminder object and then keep only the variables infant_mortality, life_expectancy, population and country.
+```{r}
+gapminder %>%
+filter(continent == "Africa") %>%
+select(country, infant_mortality, life_expectancy, population) %>%
+
+```
+
+Make 2 plots using ggplot for life expectancy as a function of infant mortality and population. Also, give each country a separate color in the plot.
+```{r}
+gapminder %>%
+filter(continent == "Africa") %>%
+select(country, infant_mortality, life_expectancy, population) %>%
+ggplot () +
+geom_line(aes(x= life_expectancy, y = infant_mortaltiy, color = country))
+
+```
+```{r}
+gapminder %>%
+filter(continent == "Africa") %>%
+select(country, infant_mortality, life_expectancy, population) %>%
+ggplot () +
+geom_line(aes(x= life_expectancy, y = population, color = country))
+```
+
+Write code that uses the gapminder object, pulls out data for africa and year 2000 and creates a ggplot for life_expectancy as a function of infant_mortality, with a linear model fit added.
+
+```{r}
+gapminder %>%
+filter(continent == "Africa" | year == 2000)
+ggplot(gapminder, aes(x = life_expectancy, y = infant_mortality, color = country) ) %>%
+     geom_point() +
+     geom_smooth(method = "lm", se = FALSE)
+
+```
+
+
+
 
 This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook.
